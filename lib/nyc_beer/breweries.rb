@@ -1,0 +1,3 @@
+class Brewery
+
+end
