@@ -24,19 +24,22 @@ class Scraper
   end
 
   def scrape_beers(url)
+    brewery = Brewery.find_brewery_by_url(url)
     html = open(url)
     doc = Nokogiri::HTML(html)
     beer_list = doc.css('table')[2].css('tr')
     i = 0
     for beer in beer_list
       if i != 0
-        hash = {:name => '', :style => '', :abv => '', :ratings => '', :score => ''}
+        hash = {:brewery => '', :name => '', :style => '', :abv => '', :ratings => '', :score => ''}
+        hash[:brewery] = brewery
         hash[:name] = beer.css('td')[0].css('a').text
         hash[:style] = beer.css('td')[1].css('a').text
         hash[:abv] = beer.css('td')[2].css('span').text
         hash[:ratings] = beer.css('td')[3].css('b').text
         hash[:score] = beer.css('td')[4].css('b').text
         new_beer = Beer.new(hash)
+        brewery.beers << new_beer
       else
         i += 1
       end

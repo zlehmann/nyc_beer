@@ -25,8 +25,25 @@ class CLI
     scraped_beers = scraper.scrape_beers(brewery.url)
     beer_list = brewery.beers
     puts "Here are the beers from #{brewery.name}:"
+    i = 1
     beer_list.each do |beer|
-      puts "#{beer.number}. #{beer.name}: #{beer.style} Ratings: #{beer.ratings}, Score: #{beer.score}"
+      puts "#{i}. #{beer.name}: #{beer.style} Ratings: #{beer.ratings}, Score: #{beer.score}"
+      i += 1
+    end
+    exit_menu
+  end
+
+  def exit_menu
+    puts "Type 'exit' to quit, or 'back' to return to the brewery list:"
+    input = gets.strip
+    case input
+    when "back"
+      list_breweries
+    when "exit"
+      puts "Thanks for checking out the breweries of NYC!!"
+    else
+      puts "Invalid choice, try again."
+      exit_menu
     end
   end
 

@@ -28,4 +28,18 @@ class Brewery
       return result
     end
   end
+
+  def self.find_brewery_by_url(url)
+    result = nil
+    for brewery in @@all
+      if brewery.url == url
+        result = brewery
+      end
+    end
+    if result == nil
+      return "Brewery not found."
+    else
+      return result
+    end
+  end
 end
