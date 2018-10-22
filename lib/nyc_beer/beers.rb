@@ -1,5 +1,5 @@
 class Beer
-  attr_accessor :name, :style, :abv, :ratings, :score
+  attr_accessor :number, :name, :style, :abv, :ratings, :score
   @@all = []
 
   def initialize(attributes)

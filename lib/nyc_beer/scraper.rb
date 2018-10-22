@@ -1,5 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
+require_relative './breweries'
+require_relative './beers'
 
 class Scraper
 
@@ -9,22 +11,21 @@ class Scraper
   def scrape_breweries(url)
     html = open(url)
     doc = Nokogiri::HTML(html)
-    breweries = []
     brewery_list = doc.css('#ba-content').css('ul').first.css('li')
+    i = 1
     for brewery in brewery_list
-      hash = {:name => '', :address => '', :url => ''}
-      hash[:name] = brewery.text.split(' - ')[0]
-      hash[:address] = brewery.text.split(' - ')[1]
-      hash[:url] = 'https://www.beeradvocate.com' + brewery.css('a').first['href']
-      breweries << hash
+      new_brewery = Brewery.new
+      new_brewery.number = i
+      new_brewery.name = brewery.text.split(' - ')[0].strip
+      new_brewery.address = brewery.text.split(' - ')[1]
+      new_brewery.url = 'https://www.beeradvocate.com' + brewery.css('a').first['href']
+      i += 1
     end
-    return breweries
   end
 
   def scrape_beers(url)
     html = open(url)
     doc = Nokogiri::HTML(html)
-    beers = []
     beer_list = doc.css('table')[2].css('tr')
     i = 0
     for beer in beer_list
@@ -35,11 +36,11 @@ class Scraper
         hash[:abv] = beer.css('td')[2].css('span').text
         hash[:ratings] = beer.css('td')[3].css('b').text
         hash[:score] = beer.css('td')[4].css('b').text
-        beers << hash
+        new_beer = Beer.new(hash)
       else
         i += 1
       end
     end
-    return beers
+    #return beers
   end
 end
