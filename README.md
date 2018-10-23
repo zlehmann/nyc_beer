@@ -1,8 +1,6 @@
 # NycBeer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nyc_beer`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the NYC Beer Gem! This gem was developed, as a Flatiron School project, to help users explore the breweries of New York City through a command line interface. This gem allows the user to view a list of every brewery in New York City and pull up beer lists for each brewery.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute the bin file './bin/nyc_beer'. You will be prompted with a list of the breweries in New York City. You can enter the corresponding number for any brewery to pull up that brewery's beer list containing details about each beer.
 
 ## Development
 
