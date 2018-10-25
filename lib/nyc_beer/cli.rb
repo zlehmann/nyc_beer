@@ -5,15 +5,18 @@ class CLI
   require_relative './breweries'
 
   def call
+    get_breweries
     list_breweries
+  end
+
+  def get_breweries
+    scraper = Scraper.new
+    scraper.scrape_breweries("https://www.beeradvocate.com/place/city/12/")
   end
 
   def list_breweries
     puts "Welcome to the breweries of New York City!"
-    scraper = Scraper.new
-    scraper.scrape_breweries("https://www.beeradvocate.com/place/city/12/")
-    brewery_list = Brewery.all
-    for brewery in brewery_list
+    for brewery in Brewery.all
       puts "#{brewery.number}. #{brewery.name} - #{brewery.address}"
     end
     brewery_menu
@@ -27,7 +30,7 @@ class CLI
     puts "Here are the beers from #{brewery.name}:"
     i = 1
     beer_list.each do |beer|
-      puts "#{i}. #{beer.name}: #{beer.style} Ratings: #{beer.ratings}, Score: #{beer.score}"
+      puts "#{i}. #{beer.name.ljust(50)} #{beer.style.ljust(30)} Ratings: #{sprintf("%-10.10s", beer.ratings)} Score: #{sprintf("%-5.5s", beer.score)}"
       i += 1
     end
     exit_menu
