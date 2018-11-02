@@ -15,7 +15,7 @@ class Brewery
     @@all
   end
 
-  def self.find_brewery_by_number(number)
+  def self.find_brewery_by_number(number) #look up .find
     result = nil
     for brewery in @@all
       if brewery.number == number
