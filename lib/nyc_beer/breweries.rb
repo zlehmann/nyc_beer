@@ -15,31 +15,11 @@ class Brewery
     @@all
   end
 
-  def self.find_brewery_by_number(number) #look up .find
-    result = nil
-    for brewery in @@all
-      if brewery.number == number
-        result = brewery
-      end
-    end
-    if result == nil
-      return "Brewery not found."
-    else
-      return result
-    end
+  def self.find_brewery_by_number(number)
+    Brewery.all.find {|brewery| brewery.number == number}
   end
 
   def self.find_brewery_by_url(url)
-    result = nil
-    for brewery in @@all
-      if brewery.url == url
-        result = brewery
-      end
-    end
-    if result == nil
-      return "Brewery not found."
-    else
-      return result
-    end
+    Brewery.all.find {|brewery| brewery.url == url}
   end
 end
