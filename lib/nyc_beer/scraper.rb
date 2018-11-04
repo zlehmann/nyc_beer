@@ -4,7 +4,7 @@ class Scraper
     puts "*****Scraping breweries"
     doc = Nokogiri::HTML(html)
     brewery_list = doc.css('#ba-content').css('ul').first.css('li')
-    brewery_list.drop(1).each.with_index(1) do |brewery, i|
+    brewery_list.each.with_index(1) do |brewery, i|
       new_brewery = Brewery.new
       new_brewery.number = i
       new_brewery.name = brewery.text.split(' - ')[0].strip

@@ -5,8 +5,7 @@ class CLI
   end
 
   def get_breweries
-    scraper = Scraper.new
-    scraper.scrape_breweries("https://www.beeradvocate.com/place/city/12/")
+    Scraper.new.scrape_breweries("https://www.beeradvocate.com/place/city/12/")
   end
 
   def list_breweries
@@ -47,8 +46,7 @@ class CLI
     puts "Enter a number for more information:"
     input = gets.strip
     if input.to_i >=1  && input.to_i <= Brewery.all.length
-      brewery = Brewery.find_brewery_by_number(input.to_i)
-      list_beers(brewery)
+      list_beers(Brewery.find_brewery_by_number(input.to_i))
     else
       puts "Invalid choice, try again."
       brewery_menu
