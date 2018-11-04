@@ -17,16 +17,10 @@ class CLI
     brewery_menu
   end
 
-  def list_beers(number)
-    if number.to_i >=1  && number.to_i <= Brewery.all.length
-      brewery = Brewery.find_brewery_by_number(number.to_i)
-    else
-    end
-    scraper = Scraper.new
-    scraped_beers = scraper.scrape_beers(brewery)
-    beer_list = brewery.beers
+  def list_beers(brewery)
+    Scraper.new.scrape_beers(brewery)
     puts "Here are the beers from #{brewery.name}:"
-    beer_list.each.with_index(1) do |beer, i|
+    brewery.beers.each.with_index(1) do |beer, i|
       puts "#{i}. #{beer.name.ljust(50)} #{beer.style.ljust(30)} Ratings: #{sprintf("%-10.10s", beer.ratings)} Score: #{sprintf("%-5.5s", beer.score)}"
     end
     exit_menu
@@ -49,6 +43,12 @@ class CLI
   def brewery_menu
     puts "Enter a number for more information:"
     input = gets.strip
-    list_beers(input)
+    if input.to_i >=1  && input.to_i <= Brewery.all.length
+      brewery = Brewery.find_brewery_by_number(input.to_i)
+      list_beers(brewery)
+    else
+      puts "Invalid choice, try again."
+      brewery_menu
+    end
   end
 end
