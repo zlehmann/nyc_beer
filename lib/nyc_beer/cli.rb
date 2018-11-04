@@ -5,7 +5,7 @@ class CLI
   end
 
   def get_breweries
-    Scraper.new.scrape_breweries("https://www.beeradvocate.com/place/city/12/")
+    Scraper.new.scrape_breweries
   end
 
   def list_breweries
