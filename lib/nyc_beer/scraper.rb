@@ -1,6 +1,5 @@
 class Scraper
   def scrape_breweries
-    puts "*****Scraping breweries"
     doc = Nokogiri::HTML(open("https://www.beeradvocate.com/place/city/12/"))
     brewery_list = doc.css('#ba-content').css('ul').first.css('li')
     brewery_list.each.with_index(1) do |brewery, i|
@@ -13,7 +12,6 @@ class Scraper
   end
 
   def scrape_beers(brewery)
-    puts "*******Scraping beers"
     doc = Nokogiri::HTML(open(brewery.url))
     beer_list = doc.css('table')[2].css('tr')
     beer_list.drop(1).each do |beer|
@@ -27,6 +25,5 @@ class Scraper
       new_beer = Beer.new(hash)
       brewery.beers << new_beer
     end
-    #return beers
   end
 end
