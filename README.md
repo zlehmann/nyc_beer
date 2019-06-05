@@ -1,6 +1,6 @@
 # NycBeer
 
-Welcome to the NYC Beer Gem! This gem was developed, as a Flatiron School project, to help users explore the breweries of New York City through a command line interface. This gem allows the user to view a list of every brewery in New York City and pull up beer lists for each brewery.
+Welcome to the NYC Beer Gem! This gem was developed as a Flatiron School project. I developed this gem to help users explore the breweries of New York City through a command line interface. This gem allows the user to view a list of every brewery in New York City and pull up beer lists for each brewery.
 
 ## Installation
 
